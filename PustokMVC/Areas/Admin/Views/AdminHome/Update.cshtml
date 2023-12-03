@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Update Slider";
+}
+@model SliderUpdateVM
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"] </h6>
+    </div>
+    <div class="card-body">
+        <form action="" method="post">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImgUrl"></label>
+                <input asp-for="ImgUrl" class="form-control">
+                <span asp-validation-for="ImgUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="left">Image on left</label>
+                <input asp-for="Position" value="false" id="left" type="radio">
+                <label for="right">Image on right</label>
+                <input asp-for="Position" value="true" id="right" type="radio">
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+            <button class="btn btn-success">Update</button>
+        </form>
+    </div>
+</div>

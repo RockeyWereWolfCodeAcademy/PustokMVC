@@ -1,0 +1,100 @@
+﻿@model List<SliderListVM>
+
+@{
+    ViewData["Title"] = "Admin Home";
+}
+
+@section styles{
+    <!-- Custom styles for this page -->
+    <link href="~/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+}
+
+@section scripts{
+    <!-- Page level plugins -->
+    <script src="~/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/admin/js/demo/datatables-demo.js"></script>
+    @if (TempData["Response"] != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if ((string)TempData["Response"] == "updated" || (string)TempData["Response"] == "deleted" || (string)TempData["Response"] == "created")
+        {
+            <script>
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Data @TempData["Response"]",
+                    icon: "success"
+                });
+            </script>
+        }
+        else
+        {
+            <script>
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                });
+            </script>
+        }
+    }
+    
+
+}
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables </h6>
+    </div>
+    <div class="card-body">
+        <a class="btn btn-outline-success" asp-action="Create">Create</a>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Tittle</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Position</th>
+                        <th colspan="2" style="text-align: center">Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Tittle</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Position</th>
+                        <th colspan="2" style="text-align: center">Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                @foreach (var slider in Model)
+                {
+                    <tr>
+                        <td>@slider.Id</td>
+                        <td>@slider.Title</td>
+                        <td>@slider.Description</td>
+                        <td>@slider.Price</td>
+                            <td><img src="@slider.ImgUrl" width="250px" height="250px" /></td>
+                        <td>@(slider.IsRight == true ? "Image on right" : "image on left")</td>
+                            <td><a class="btn btn-outline-info" asp-action="Update" asp-route-id="@slider.Id">Update</a></td>
+                            <td><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id ="@slider.Id">Delete</a></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
